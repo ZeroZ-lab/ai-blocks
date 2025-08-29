@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+- 修改完代码以后同步修改对应文件夹下的markdown文档
