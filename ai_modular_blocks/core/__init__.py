@@ -12,7 +12,7 @@ from .base import (
     BaseProvider,
     BaseVectorStore,
 )
-from .config import (
+from .config_manager import (
     AppConfig,
     CacheConfig,
     ConfigManager,

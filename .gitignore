@@ -2,3 +2,23 @@
 /.env
 /.ruff_cache
 /ai_modular_blocks.egg-info
+.venv
+# Python缓存文件
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 各种缓存目录  
+.cache/
+**/.cache/
+*.cache
+cache/
+**/cache/
+
+# 开发工具缓存
+**/.mypy_cache/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.ipynb_checkpoints/

@@ -654,7 +654,12 @@ ruff check --fix .     # 自动修复代码问题
 
 # 3. 运行测试
 pytest tests/ --cov=ai_modular_blocks
+
+# 4. 清理Python缓存（如果意外提交了）
+find . -name "__pycache__" -type d -not -path "./.venv/*" -exec git rm -r --cached {} \; 2>/dev/null || true
 ```
+
+**⚠️ 注意**: 项目已正确配置`.gitignore`来忽略所有`__pycache__`文件夹。如果你看到这些文件被git跟踪，说明它们在配置前就被添加了，需要手动清理。
 
 ### 扩展新功能
 

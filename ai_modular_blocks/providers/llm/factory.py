@@ -68,6 +68,18 @@ class LLMProviderFactory:
         except ImportError as e:
             logger.debug(f"Anthropic provider not available: {e}")
 
+        # Register DeepSeek provider if available
+        try:
+            from .deepseek_provider import DeepSeekProvider
+
+            if DeepSeekProvider.is_available():
+                cls.register_provider("deepseek", DeepSeekProvider)
+                logger.debug("Registered DeepSeek provider")
+            else:
+                logger.debug("DeepSeek provider not available (missing dependencies)")
+        except ImportError as e:
+            logger.debug(f"DeepSeek provider not available: {e}")
+
     @classmethod
     def register_provider(cls, name: str, provider_class: Type[LLMProvider]) -> None:
         """
@@ -161,59 +173,19 @@ class LLMProviderFactory:
     def _validate_config_for_provider(
         cls, provider_name: str, config: LLMConfig
     ) -> None:
-        """Validate configuration for a specific provider."""
-        # Basic validation
-        if not config.api_key:
+        """
+        Validate configuration for a specific provider.
+        
+        Note: Provider-specific validation is now handled by each provider
+        in their _validate_provider_config() method. Factory only does
+        basic checks that apply to all providers.
+        """
+        # 只做最基本的检查 - 其他交给provider自己处理
+        if not hasattr(config, 'api_key'):
             raise ConfigurationException(
-                f"API key is required for provider '{provider_name}'",
+                f"Configuration must have api_key attribute",
                 config_key="api_key",
                 details={"provider": provider_name},
-            )
-
-        # Provider-specific validation
-        if provider_name == "openai":
-            cls._validate_openai_config(config)
-        elif provider_name == "anthropic":
-            cls._validate_anthropic_config(config)
-
-    @classmethod
-    def _validate_openai_config(cls, config: LLMConfig) -> None:
-        """Validate OpenAI-specific configuration."""
-        # Validate API key format (basic check)
-        if not config.api_key.startswith("sk-"):
-            raise ConfigurationException(
-                "OpenAI API key must start with 'sk-'",
-                config_key="api_key",
-                details={"provider": "openai"},
-            )
-
-        # Validate timeout settings
-        if config.timeout <= 0:
-            raise ConfigurationException(
-                "Timeout must be positive",
-                config_key="timeout",
-                config_value=config.timeout,
-                details={"provider": "openai"},
-            )
-
-    @classmethod
-    def _validate_anthropic_config(cls, config: LLMConfig) -> None:
-        """Validate Anthropic-specific configuration."""
-        # Validate API key format (basic check)
-        if not config.api_key.startswith("sk-"):
-            raise ConfigurationException(
-                "Anthropic API key must start with 'sk-'",
-                config_key="api_key",
-                details={"provider": "anthropic"},
-            )
-
-        # Validate timeout settings
-        if config.timeout <= 0:
-            raise ConfigurationException(
-                "Timeout must be positive",
-                config_key="timeout",
-                config_value=config.timeout,
-                details={"provider": "anthropic"},
             )
 
     @classmethod

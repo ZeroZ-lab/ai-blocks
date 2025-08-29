@@ -2,4 +2,5 @@
 alwaysApply: true
 ---
 
+- 回答问题之前，先获取文件所在文件夹的markdown文档
 - 修改完代码以后同步修改对应文件夹下的markdown文档

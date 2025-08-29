@@ -22,3 +22,10 @@ try:
     __all__.append("AnthropicProvider")
 except ImportError:
     AnthropicProvider = None
+
+try:
+    from .deepseek_provider import DeepSeekProvider
+
+    __all__.append("DeepSeekProvider")
+except ImportError:
+    DeepSeekProvider = None

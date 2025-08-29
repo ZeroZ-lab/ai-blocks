@@ -6,7 +6,7 @@ __version__ = "0.1.0"
 __author__ = "Your Name"
 __email__ = "your-email@example.com"
 
-from .core.exceptions import AIBlockException
+from .core.exceptions import AIBlocksException
 from .core.interfaces import LLMProvider, VectorStore
 from .core.types import LLMResponse, VectorDocument
 
@@ -15,5 +15,5 @@ __all__ = [
     "VectorStore",
     "LLMResponse",
     "VectorDocument",
-    "AIBlockException",
+    "AIBlocksException",
 ]
