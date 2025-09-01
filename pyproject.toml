@@ -9,7 +9,7 @@ description = "Modular AI development blocks for building composable AI applicat
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your-email@example.com"}
+    {name = "AI Modular Blocks Team", email = "team@ai-modular-blocks.com"}
 ]
 keywords = ["ai", "llm", "rag", "modular", "composable"]
 classifiers = [
@@ -57,10 +57,10 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-username/ai-modular-blocks"
-Documentation = "https://github.com/your-username/ai-modular-blocks/wiki"
-Repository = "https://github.com/your-username/ai-modular-blocks"
-"Bug Tracker" = "https://github.com/your-username/ai-modular-blocks/issues"
+Homepage = "https://github.com/ai-blocks/ai-modular-blocks"
+Documentation = "https://github.com/ai-blocks/ai-modular-blocks/wiki"
+Repository = "https://github.com/ai-blocks/ai-modular-blocks"
+"Bug Tracker" = "https://github.com/ai-blocks/ai-modular-blocks/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

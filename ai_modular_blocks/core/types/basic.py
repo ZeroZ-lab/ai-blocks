@@ -1,91 +1,77 @@
 """
 Basic type definitions for AI Modular Blocks
 
-This module contains fundamental types used throughout the system:
-- Content types and message formats
-- LLM responses and document structures
-- Search results and basic data structures
-
-Following the "Do One Thing Well" philosophy.
+Only the essential types needed for interoperability.
+Everything else is optional.
 """
 
 from dataclasses import dataclass
-from datetime import datetime
-from enum import Enum
 from typing import Any, Dict, List, Optional
-
-
-class ContentType(str, Enum):
-    """Content types supported by the system"""
-
-    TEXT = "text"
-    IMAGE = "image"
-    AUDIO = "audio"
-    VIDEO = "video"
-    DOCUMENT = "document"
-
-
-@dataclass
-class ChatMessage:
-    """Chat message format"""
-
-    role: str
-    content: str
-    metadata: Optional[Dict[str, Any]] = None
-    timestamp: Optional[datetime] = None
 
 
 @dataclass
 class LLMResponse:
-    """Standard response format for LLM providers"""
-
+    """Standard LLM response format."""
+    
     content: str
-    model: str
-    usage: Dict[str, int]
-    created_at: datetime
-    finish_reason: str
+    model: Optional[str] = None
+    usage: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = None
+    
+    def __getitem__(self, key: str) -> Any:
+        """Allow dict-like access for backward compatibility."""
+        if key == "content":
+            return self.content
+        elif hasattr(self, key):
+            return getattr(self, key)
+        elif self.metadata and key in self.metadata:
+            return self.metadata[key]
+        raise KeyError(f"Key '{key}' not found")
+
+
+@dataclass  
+class Message:
+    """Simple message format."""
+    
+    role: str  # "user", "assistant", "system"
+    content: str
     metadata: Optional[Dict[str, Any]] = None
 
 
 @dataclass
-class VectorDocument:
-    """Document representation for vector storage"""
-
+class ToolCall:
+    """Tool call request."""
+    
     id: str
-    content: str
-    metadata: Dict[str, Any]
-    embedding: Optional[List[float]] = None
-    content_type: ContentType = ContentType.TEXT
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
+    name: str
+    arguments: Dict[str, Any]
 
 
 @dataclass
-class SearchResult:
-    """Vector search result"""
-
-    document: VectorDocument
-    score: float
-    metadata: Optional[Dict[str, Any]] = None
+class ToolResult:
+    """Tool execution result."""
+    
+    tool_call_id: str
+    tool_name: str
+    result: Optional[Any] = None
+    error: Optional[str] = None
+    success: bool = True
 
 
 @dataclass
-class ProcessingConfig:
-    """Configuration for processing operations"""
-
-    chunk_size: int = 1000
-    chunk_overlap: int = 200
-    max_tokens: Optional[int] = None
-    temperature: float = 0.7
-    top_k: int = 5
-    filter_metadata: Optional[Dict[str, Any]] = None
+class ToolDefinition:
+    """Tool definition for LLM function calling."""
+    
+    name: str
+    description: str
+    parameters: Dict[str, Any]
 
 
-# =============================================================================
-# Type aliases for common use cases
-# =============================================================================
+# Type aliases for convenience
+MessageList = List[Message]
+ToolCallList = List[ToolCall] 
+ToolResultList = List[ToolResult]
+ToolList = List[ToolDefinition]
 
-MessageList = List[ChatMessage]
-DocumentList = List[VectorDocument]
-EmbeddingVector = List[float]
-MetadataDict = Dict[str, Any]
+# Legacy alias for compatibility
+VectorDocument = Dict[str, Any]  # Users can define their own format
