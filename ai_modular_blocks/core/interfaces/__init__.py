@@ -1,58 +1,24 @@
 """
 Interface definitions for AI Modular Blocks
 
-This module re-exports all interfaces to maintain backward compatibility
-while organizing code according to single responsibility principle.
+Minimal interface exports for essential functionality.
 """
 
-# LLM interfaces
-from .llm import (
-    EnhancedLLMProvider,
-    LLMProvider,
-)
+# Minimal interfaces
+from .minimal import LLMProvider, ToolProvider
 
-# MCP interfaces
-from .mcp import (
-    MCPProvider,
-)
+# Optional interfaces (if they exist)
+try:
+    from .llm import LLMProvider as DetailedLLMProvider
+except ImportError:
+    DetailedLLMProvider = LLMProvider
 
-# Storage interfaces
-from .storage import (
-    EmbeddingProvider,
-    VectorStore,
-)
-
-# Tool interfaces
-from .tools import (
-    ToolProvider,
-)
-
-# Utility interfaces
-from .utilities import (
-    CacheProvider,
-    DocumentProcessor,
-    Middleware,
-    Plugin,
-)
+try:
+    from .tools import ToolProvider as DetailedToolProvider  
+except ImportError:
+    DetailedToolProvider = ToolProvider
 
 __all__ = [
-    # LLM interfaces
     "LLMProvider",
-    "EnhancedLLMProvider",
-    
-    # Storage interfaces
-    "VectorStore",
-    "EmbeddingProvider",
-    
-    # Tool interfaces
     "ToolProvider",
-    
-    # MCP interfaces
-    "MCPProvider",
-    
-    # Utility interfaces
-    "DocumentProcessor",
-    "CacheProvider",
-    "Middleware",
-    "Plugin",
 ]

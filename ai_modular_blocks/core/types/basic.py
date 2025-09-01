@@ -17,6 +17,8 @@ class LLMResponse:
     model: Optional[str] = None
     usage: Optional[Dict[str, Any]] = None
     metadata: Optional[Dict[str, Any]] = None
+    finish_reason: Optional[str] = None
+    created_at: Optional[Any] = None  # Can be datetime or timestamp
     
     def __getitem__(self, key: str) -> Any:
         """Allow dict-like access for backward compatibility."""

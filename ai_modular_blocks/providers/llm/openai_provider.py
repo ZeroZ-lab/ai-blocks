@@ -262,6 +262,28 @@ class OpenAIProvider(BaseLLMProvider):
 
     def _convert_openai_response(self, response) -> LLMResponse:
         """Convert OpenAI response to internal format."""
+        # Defensive check: ensure response is an object, not string
+        if isinstance(response, str):
+            self.logger.warning(f"OpenAI returned string instead of response object: {response}")
+            return LLMResponse(
+                content=response,
+                model="unknown",
+                usage={},
+                finish_reason="error",
+                metadata={"error": "String response received"}
+            )
+        
+        # Ensure response has expected attributes
+        if not hasattr(response, 'choices'):
+            self.logger.warning(f"OpenAI response missing 'choices' attribute: {type(response)}")
+            return LLMResponse(
+                content=str(response),
+                model="unknown", 
+                usage={},
+                finish_reason="error",
+                metadata={"error": "Invalid response structure"}
+            )
+        
         # Extract the main content
         content = ""
         if response.choices and response.choices[0].message:
@@ -317,8 +339,18 @@ class OpenAIProvider(BaseLLMProvider):
 
     def _convert_openai_streaming_chunk(self, chunk) -> LLMResponse:
         """Convert OpenAI streaming chunk to internal format."""
+        # Defensive check for streaming chunks
+        if isinstance(chunk, str):
+            return LLMResponse(
+                content=chunk,
+                model="unknown",
+                usage={},
+                finish_reason="streaming",
+                metadata={"is_chunk": True, "error": "String chunk received"}
+            )
+        
         content = ""
-        if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+        if hasattr(chunk, 'choices') and chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
             content = chunk.choices[0].delta.content
 
         finish_reason = ""

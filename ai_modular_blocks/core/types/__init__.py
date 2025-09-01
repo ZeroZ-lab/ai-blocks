@@ -1,90 +1,34 @@
 """
 Type definitions for AI Modular Blocks
 
-This module re-exports all types to maintain backward compatibility
-while organizing code according to single responsibility principle.
+Minimal type exports for essential functionality.
 """
 
 # Basic types
 from .basic import (
-    ChatMessage,
-    ContentType,
-    DocumentList,
-    EmbeddingVector,
-    LLMResponse,
-    MessageList,
-    MetadataDict,
-    ProcessingConfig,
-    SearchResult,
-    VectorDocument,
+    LLMResponse, Message, ToolCall, ToolResult, ToolDefinition,
+    MessageList, ToolCallList, ToolResultList, ToolList,
+    VectorDocument
 )
 
 # Configuration types
-from .config import (
-    EmbeddingConfig,
-    LLMConfig,
-    MCPConfig,
-    ProviderConfig,
-    ToolConfig,
-    VectorStoreConfig,
-)
+from .config import LLMConfig, ToolConfig
 
-# MCP types
-from .mcp import (
-    MCPContext,
-    MCPResource,
-    MCPResourceType,
-)
-
-# Tool types
+# Tool types  
 from .tools import (
-    EnhancedLLMResponse,
-    FunctionCallMessage,
-    ToolCall,
-    ToolCallList,
-    ToolDefinition,
-    ToolList,
-    ToolParameter,
-    ToolParameterType,
-    ToolResult,
-    ToolResultList,
+    ToolCall, ToolResult, ToolDefinition,
+    ToolCallList, ToolResultList, ToolList
 )
 
 __all__ = [
     # Basic types
-    "ChatMessage",
-    "ContentType",
-    "LLMResponse",
-    "VectorDocument",
-    "SearchResult",
-    "ProcessingConfig",
+    "LLMResponse", "Message", "VectorDocument",
     "MessageList",
-    "DocumentList",
-    "EmbeddingVector",
-    "MetadataDict",
-    
-    # Configuration types
-    "ProviderConfig",
-    "LLMConfig",
-    "VectorStoreConfig",
-    "EmbeddingConfig",
-    "ToolConfig",
-    "MCPConfig",
     
     # Tool types
-    "ToolParameterType",
-    "ToolParameter",
-    "ToolDefinition",
-    "ToolCall",
-    "ToolResult",
-    "FunctionCallMessage",
-    "EnhancedLLMResponse",
-    "ToolList",
-    "ToolCallList",
-    "ToolResultList",
+    "ToolCall", "ToolResult", "ToolDefinition",
+    "ToolCallList", "ToolResultList", "ToolList",
     
-    # MCP types
-    "MCPResourceType",
-    "MCPResource",
-    "MCPContext",
+    # Configuration types
+    "LLMConfig", "ToolConfig",
 ]

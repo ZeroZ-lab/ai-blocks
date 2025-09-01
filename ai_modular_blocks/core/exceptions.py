@@ -132,6 +132,9 @@ class ProviderException(AIBlocksException):
         if provider_type:
             details["provider_type"] = provider_type
 
+        # Extract potential conflicting parameters from kwargs
+        kwargs.pop("error_code", None)  # Remove if exists to avoid conflict
+        
         super().__init__(
             message=message,
             error_code="PROVIDER_ERROR",

@@ -18,6 +18,7 @@ class LLMConfig:
     temperature: float = 0.7
     max_tokens: Optional[int] = None
     timeout: float = 30.0
+    max_retries: int = 3
     base_url: Optional[str] = None
     extra_headers: Dict[str, str] = field(default_factory=dict)
     

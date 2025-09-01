@@ -1,168 +1,33 @@
 """
 Core module for AI Modular Blocks
 
-This module provides the foundational components for the AI Modular Blocks
-framework including interfaces, types, configuration, and base implementations.
+Minimal core exports for the framework.
+Users can import what they need, or ignore this entirely.
 """
 
-from .base import (
-    BaseDocumentProcessor,
-    BaseEmbeddingProvider,
-    BaseLLMProvider,
-    BaseProvider,
-    BaseVectorStore,
+# Essential types
+from .types.basic import (
+    LLMResponse, Message, ToolCall, ToolResult, ToolDefinition,
+    MessageList, ToolCallList, ToolResultList, ToolList
 )
-from .config_manager import (
-    AppConfig,
-    CacheConfig,
-    ConfigManager,
-    MonitoringConfig,
-    PerformanceConfig,
-    ProvidersConfig,
-    SecurityConfig,
-    SystemConfig,
-    get_config,
-    get_config_manager,
-    init_config,
-)
-from .exceptions import (
-    AIBlocksException,
-    AuthenticationException,
-    CacheException,
-    ConfigurationException,
-    DependencyException,
-    NetworkException,
-    PluginException,
-    ProcessorException,
-    ProviderException,
-    QuotaExceededException,
-    RateLimitException,
-    SerializationException,
-    TimeoutException,
-    ValidationException,
-)
-from .interfaces import (
-    CacheProvider,
-    DocumentProcessor,
-    EmbeddingProvider,
-    EnhancedLLMProvider,
-    LLMProvider,
-    MCPProvider,
-    Middleware,
-    Plugin,
-    ToolProvider,
-    VectorStore,
-)
-from .types import (
-    ChatMessage,
-    ContentType,
-    DocumentList,
-    EmbeddingConfig,
-    EmbeddingVector,
-    EnhancedLLMResponse,
-    FunctionCallMessage,
-    LLMConfig,
-    LLMResponse,
-    MCPConfig,
-    MCPContext,
-    MCPResource,
-    MCPResourceType,
-    MessageList,
-    MetadataDict,
-    ProcessingConfig,
-    ProviderConfig,
-    SearchResult,
-    ToolCall,
-    ToolCallList,
-    ToolConfig,
-    ToolDefinition,
-    ToolList,
-    ToolParameter,
-    ToolParameterType,
-    ToolResult,
-    ToolResultList,
-    VectorDocument,
-    VectorStoreConfig,
-)
-from .validators import InputValidator
+from .types.config import LLMConfig, ToolConfig
 
+# Essential interfaces
+from .interfaces.minimal import LLMProvider, ToolProvider
+
+# Essential exceptions
+from .exceptions import AIBlocksException
+
+# Minimal exports
 __all__ = [
-    # Interfaces
-    "LLMProvider",
-    "EnhancedLLMProvider",
-    "VectorStore",
-    "EmbeddingProvider",
-    "DocumentProcessor",
-    "CacheProvider",
-    "Middleware",
-    "Plugin",
-    "ToolProvider",
-    "MCPProvider",
     # Types
-    "ChatMessage",
-    "LLMResponse",
-    "EnhancedLLMResponse",
-    "VectorDocument",
-    "SearchResult",
-    "ProcessingConfig",
-    "LLMConfig",
-    "VectorStoreConfig",
-    "EmbeddingConfig",
-    "ProviderConfig",
-    "ContentType",
-    "MessageList",
-    "DocumentList",
-    "EmbeddingVector",
-    "MetadataDict",
-    # Tool types
-    "ToolDefinition",
-    "ToolCall",
-    "ToolResult",
-    "ToolParameter",
-    "ToolParameterType",
-    "ToolList",
-    "ToolCallList",
-    "ToolResultList",
-    "ToolConfig",
-    "FunctionCallMessage",
-    # MCP types
-    "MCPResource",
-    "MCPContext",
-    "MCPResourceType",
-    "MCPConfig",
+    "LLMResponse", "Message", "ToolCall", "ToolResult", "ToolDefinition",
+    "MessageList", "ToolCallList", "ToolResultList", "ToolList",
+    "LLMConfig", "ToolConfig",
+    
+    # Interfaces
+    "LLMProvider", "ToolProvider",
+    
     # Exceptions
     "AIBlocksException",
-    "ConfigurationException",
-    "ValidationException",
-    "ProviderException",
-    "AuthenticationException",
-    "RateLimitException",
-    "TimeoutException",
-    "QuotaExceededException",
-    "ProcessorException",
-    "CacheException",
-    "PluginException",
-    "DependencyException",
-    "NetworkException",
-    "SerializationException",
-    # Validators
-    "InputValidator",
-    # Configuration
-    "ConfigManager",
-    "AppConfig",
-    "SystemConfig",
-    "SecurityConfig",
-    "PerformanceConfig",
-    "CacheConfig",
-    "MonitoringConfig",
-    "ProvidersConfig",
-    "get_config_manager",
-    "get_config",
-    "init_config",
-    # Base classes
-    "BaseProvider",
-    "BaseLLMProvider",
-    "BaseVectorStore",
-    "BaseEmbeddingProvider",
-    "BaseDocumentProcessor",
 ]

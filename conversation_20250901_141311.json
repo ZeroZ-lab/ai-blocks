@@ -1,0 +1,60 @@
+[
+  {
+    "role": "system",
+    "content": "你是一个有用的AI助手。你会记住我们的对话历史，并根据上下文提供相关的回复。",
+    "timestamp": "2025-09-01T14:13:05.480763",
+    "type": "system"
+  },
+  {
+    "role": "user",
+    "content": "你还记得我的名字吗？",
+    "timestamp": "2025-09-01T14:13:07.483319",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'DeepSeekProvider' object has no attribute 'generate_from_messages'",
+    "timestamp": "2025-09-01T14:13:07.483355",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "我刚才说我喜欢什么编程语言？",
+    "timestamp": "2025-09-01T14:13:08.484623",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'DeepSeekProvider' object has no attribute 'generate_from_messages'",
+    "timestamp": "2025-09-01T14:13:08.484651",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "能推荐一些Python的高级特性给我学习吗？",
+    "timestamp": "2025-09-01T14:13:09.485916",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'DeepSeekProvider' object has no attribute 'generate_from_messages'",
+    "timestamp": "2025-09-01T14:13:09.485949",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "谢谢！你觉得装饰器在实际项目中有什么用途？",
+    "timestamp": "2025-09-01T14:13:10.487268",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'DeepSeekProvider' object has no attribute 'generate_from_messages'",
+    "timestamp": "2025-09-01T14:13:10.487299",
+    "type": "assistant",
+    "provider": "deepseek"
+  }
+]
