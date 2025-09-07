@@ -36,11 +36,10 @@ class ModelComparator:
         # Anthropic
         if os.getenv("ANTHROPIC_API_KEY"):
             self.models["Anthropic Claude"] = create_llm(
-                "openai", 
-                api_key=os.getenv("OPENAI_API_KEY"),
-                model="claude-3-5-haiku-latest",
-                temperature=0.7,
-                base_url="https://api.ephone.ai/v1"
+                "anthropic",
+                api_key=os.getenv("ANTHROPIC_API_KEY"),
+                model="claude-3-haiku-20240307",
+                temperature=0.7
             )
         
         # DeepSeek
@@ -50,7 +49,7 @@ class ModelComparator:
                 api_key=os.getenv("DEEPSEEK_API_KEY"), 
                 model="deepseek-chat",
                 temperature=0.7,
-                base_url="https://api.deepseek.com"
+                base_url="https://api.deepseek.com/v1"
             )
     
     async def compare_responses(self, question: str):

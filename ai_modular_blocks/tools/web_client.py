@@ -34,6 +34,10 @@ class WebClient:
     ) -> Dict[str, Any]:
         """Make a POST request."""
         return await self._request("POST", url, data=data, headers=headers)
+
+    async def fetch(self, url: str, headers: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+        """Alias for GET to match example usage."""
+        return await self.get(url, headers=headers)
     
     async def _request(
         self, 
@@ -47,27 +51,41 @@ class WebClient:
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             
             async with aiohttp.ClientSession(timeout=timeout) as session:
+                # Reasonable default headers to avoid 403 from some sites
+                default_headers = {
+                    "User-Agent": (
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                        "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+                    ),
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+                    "Connection": "keep-alive",
+                }
+
                 kwargs = {}
                 if data:
                     kwargs['json'] = data
+                all_headers = default_headers.copy()
                 if headers:
-                    kwargs['headers'] = headers
+                    all_headers.update(headers)
+                kwargs['headers'] = all_headers
                 
                 async with session.request(method, url, **kwargs) as response:
                     response_text = await response.text()
-                    
+
                     # Try to parse as JSON
                     try:
                         response_data = await response.json()
-                    except:
-                        response_data = response_text
-                    
+                    except Exception:
+                        response_data = None
+
                     return {
                         "status_code": response.status,
                         "headers": dict(response.headers),
                         "data": response_data,
+                        "content": response_text,
                         "url": str(response.url),
-                        "success": 200 <= response.status < 300
+                        "success": 200 <= response.status < 300,
                     }
                     
         except Exception as e:

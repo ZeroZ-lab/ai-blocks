@@ -18,7 +18,7 @@ export OPENAI_API_KEY="your-key"
 
 ```python
 # 运行第一个AI应用
-python examples/01_basic_usage/simple_chat.py
+python examples/001_basic_llm_call/main.py
 ```
 
 ## 📖 完整文档
@@ -38,12 +38,12 @@ python examples/01_basic_usage/simple_chat.py
 
 ```
 ai-modular-blocks/
-├── examples/           # 🎯 从这里开始
-│   ├── 01_basic_usage/ # 基础LLM使用
-│   ├── 02_rag_system/  # RAG系统实现
-│   └── 03_advanced/    # 高级特性
-├── ai_modular_blocks/  # 📦 核心代码
-└── docs/              # 📖 详细文档
+├── examples/               # 🎯 从这里开始
+│   ├── 001_basic_llm_call/ # 基础LLM使用
+│   ├── 002 ... 016         # 提供商对比、流式、工具与代理
+│   └── 020_complete_application/ # 完整应用
+├── ai_modular_blocks/      # 📦 核心代码
+└── docs/                  # 📖 详细文档
 ```
 
 ## 🤝 参与贡献

@@ -11,27 +11,27 @@ AI Modular Blocks 遵循 **React 哲学** - 提供最小化的API，依赖Python
 - **用户自主**: 完全控制应用逻辑和数据流
 - **Do One Thing Well**: 每个工具都专注单一功能
 
-## 📚 示例目录
+## 📚 示例目录（与当前仓库同步）
 
 ### 🟢 基础示例 (001-005)
 | 示例 | 描述 | 核心概念 |
 |------|------|----------|
 | [001_basic_llm_call](001_basic_llm_call/) | 最基本的LLM调用 | 框架入门，极简API |
 | [002_multi_provider_comparison](002_multi_provider_comparison/) | 多提供商比较 | 统一接口，提供商切换 |
-| [003_streaming_responses](003_streaming_responses/) | 流式响应处理 | 实时交互，用户体验 |
-| [004_custom_prompting](004_custom_prompting/) | 自定义提示工程 | 提示优化，输出控制 |
-| [005_error_handling](005_error_handling/) | 错误处理和重试 | 健壮性，错误恢复 |
+| [003_streaming_response](003_streaming_response/) | 流式响应处理 | 实时交互，用户体验 |
+| [004_chat_with_history](004_chat_with_history/) | 带历史的对话 | 会话管理，消息列表 |
+| [005_prompt_templates](005_prompt_templates/) | 提示模板与参数化 | 提示优化，输出控制 |
 
 ### 🔧 工具集成 (006-010)
 | 示例 | 描述 | 核心概念 |
 |------|------|----------|
-| [006_basic_tools](006_basic_tools/) | 基础工具使用 | 工具独立性，简单集成 |
+| [006_basic_function_calling](006_basic_function_calling/) | 基础函数/工具调用 | 工具协议，调用结果整合 |
 | [007_calculator_tools](007_calculator_tools/) | 数学计算工具 | 精确计算，结果验证 |
 | [008_web_search_tools](008_web_search_tools/) | 网页搜索工具 | 信息获取，内容分析 |
 | [009_file_operations_tools](009_file_operations_tools/) | 文件操作工具 | 数据持久化，文件处理 |
 | [010_multi_tool_orchestration](010_multi_tool_orchestration/) | 多工具协调 | 工作流编排，复杂任务 |
 
-### 🤖 智能代理 (011-015)
+### 🤖 智能代理 (011-016)
 | 示例 | 描述 | 核心概念 |
 |------|------|----------|
 | [011_simple_react_agent](011_simple_react_agent/) | 简单ReACT代理 | 思考-行动循环，推理透明 |
@@ -39,15 +39,12 @@ AI Modular Blocks 遵循 **React 哲学** - 提供最小化的API，依赖Python
 | [013_planning_agent](013_planning_agent/) | 规划代理 | 目标分解，任务调度 |
 | [014_self_improving_agent](014_self_improving_agent/) | 自我改进代理 | 性能反思，持续优化 |
 | [015_multi_modal_agent](015_multi_modal_agent/) | 多模态代理 | 输入识别，专门处理 |
+| [016_multi_agent_collaboration](016_multi_agent_collaboration/) | 多代理协作 | 角色分工，消息通信 |
 
-### 🚀 高级应用 (016-020)
+### 🚀 完整应用 (020)
 | 示例 | 描述 | 核心概念 |
 |------|------|----------|
-| [016_multi_agent_collaboration](016_multi_agent_collaboration/) | 多代理协作 | 角色分工，消息通信 |
-| [017_workflow_orchestration](017_workflow_orchestration/) | 工作流编排 | 流程自动化，状态管理 |
-| [018_distributed_computing](018_distributed_computing/) | 分布式计算 | 并行处理，资源调度 |
-| [019_ai_powered_system](019_ai_powered_system/) | AI驱动系统 | 智能决策，系统集成 |
-| [020_complete_application](020_complete_application/) | **完整应用** | 企业级功能，端到端流程 |
+| [020_complete_application](020_complete_application/) | 完整端到端应用 | 组织结构、配置、运行方式 |
 
 ## 🎓 学习路径
 

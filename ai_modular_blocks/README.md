@@ -15,7 +15,7 @@
 
 ```python
 # 只要这一个函数，其余全是用户自由发挥
-from ai_modular_blocks.minimal import create_llm
+from ai_modular_blocks import create_llm
 
 llm = create_llm("openai", api_key="sk-...")
 response = await llm.generate("Hello")
@@ -106,36 +106,33 @@ class Agent(BaseAgent):  # 强制继承
         return self.framework_method(msg.framework_property)
 ```
 
-## 目录结构
+## 目录结构（与当前仓库同步）
 
 ```
 ai_modular_blocks/
-├── minimal.py              # 最小核心 - 只有这一个是必需的
+├── core/                   # 核心接口、类型、基础实现
+├── providers/              # 各种提供者实现（OpenAI/Anthropic/DeepSeek）
 ├── tools/                  # 独立工具 - 按需使用
 │   ├── calculator.py       # 数学计算
 │   ├── file_ops.py        # 文件操作  
 │   └── web_client.py      # HTTP请求
-├── core/interfaces/        # 可选参考接口
-└── providers/             # 各种提供者实现
+└── __init__.py             # 导出 create_llm 与常用类型
 
 examples/
-├── 000_quickstart/        # 快速开始
-├── user_freedom.py        # 展示用户实现自由度
-└── 001-020/              # 20个渐进式示例
+├── 001_basic_llm_call/     # 快速开始
+├── 002 ... 016             # 渐进式示例（多Provider/工具/代理）
+└── 020_complete_application # 完整应用示例
 ```
 
 ## 开始使用
 
 ```bash
 pip install ai-modular-blocks
-
-# 或者只安装最小依赖
-pip install ai-modular-blocks[minimal]
 ```
 
 ```python
 import asyncio
-from ai_modular_blocks.minimal import create_llm
+from ai_modular_blocks import create_llm
 
 async def main():
     llm = create_llm("openai", api_key="your-key")
@@ -147,10 +144,10 @@ asyncio.run(main())
 
 ## 学习路径
 
-1. **从最小开始**：`examples/000_quickstart/`
-2. **了解工具**：`examples/001-005/` - 基础功能
+1. **从最小开始**：`examples/001_basic_llm_call/`
+2. **了解工具**：`examples/002-005/` - 基础功能
 3. **组合使用**：`examples/006-010/` - 工具集成  
-4. **自由发挥**：`examples/011-020/` - 高级应用
+4. **自由发挥**：`examples/011-016/` + `020` - 高级应用
 
 每个示例都展示不同的用户实现方式，没有标准答案，只有参考实现。
 

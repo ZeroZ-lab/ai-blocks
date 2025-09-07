@@ -14,6 +14,7 @@ import json
 from datetime import datetime
 from typing import List, Dict, Any
 from dotenv import load_dotenv
+import sys
 
 from ai_modular_blocks import create_llm, Message
 
@@ -268,7 +269,7 @@ async def main():
     # 演示模式
     manager = await demo_conversation_with_context()
     
-    if manager:
+    if manager and sys.stdin.isatty():
         print(f"\n🎮 是否进入交互模式？(y/N)")
         try:
             choice = input().strip().lower()

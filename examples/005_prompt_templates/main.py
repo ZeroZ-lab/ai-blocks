@@ -9,6 +9,7 @@
 
 import asyncio
 import os
+import sys
 from typing import Dict, Any, List
 from string import Template
 from dotenv import load_dotenv
@@ -341,14 +342,15 @@ async def main():
     # 演示模式
     await demo_prompt_templates()
     
-    # 询问是否进入交互模式
-    print(f"\n🎮 是否进入交互模式？(y/N)")
-    try:
-        choice = input().strip().lower()
-        if choice in ['y', 'yes']:
-            await interactive_template_mode()
-    except KeyboardInterrupt:
-        pass
+    # 询问是否进入交互模式（仅在交互终端中）
+    if sys.stdin.isatty():
+        print(f"\n🎮 是否进入交互模式？(y/N)")
+        try:
+            choice = input().strip().lower()
+            if choice in ['y', 'yes']:
+                await interactive_template_mode()
+        except KeyboardInterrupt:
+            pass
     
     print("\n🎯 核心优势:")
     print("- 使用Python标准Template，无需学习特殊语法")

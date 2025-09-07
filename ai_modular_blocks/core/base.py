@@ -5,7 +5,7 @@ Provides concrete base implementations that work with the minimal Protocol inter
 """
 
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, AsyncGenerator
 from abc import ABC, abstractmethod
 
 from .exceptions import (
@@ -149,6 +149,66 @@ class BaseLLMProvider(ABC):
                 provider_name=getattr(self, 'provider_name', self.__class__.__name__),
                 provider_type="llm",
             ) from e
+
+    async def generate_from_messages(
+        self,
+        messages: List[Dict[str, Any]],
+        **kwargs: Any,
+    ) -> LLMResponse:
+        """
+        Convenience method: generate from a list of messages.
+        Mirrors example usage and forwards to provider implementation.
+        """
+        try:
+            model = kwargs.get('model') or getattr(self.config, 'model', None)
+            temperature = kwargs.get('temperature') or getattr(self.config, 'temperature', 0.7)
+            max_tokens = kwargs.get('max_tokens') or getattr(self.config, 'max_tokens', None)
+
+            response = await self._chat_completion_impl(
+                messages=messages,
+                model=model,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                **kwargs,
+            )
+            # Return the native LLMResponse to support attribute and dict-like access
+            return response
+        except Exception as e:
+            logger.error(f"Generation from messages failed: {e}")
+            raise ProviderException(
+                f"Failed to generate response from messages: {str(e)}",
+                provider_name=getattr(self, 'provider_name', self.__class__.__name__),
+                provider_type="llm",
+            ) from e
+
+    async def stream_generate(
+        self,
+        prompt: Union[str, List[Dict[str, Any]]],
+        **kwargs: Any,
+    ) -> AsyncGenerator[LLMResponse, None]:
+        """
+        Convenience streaming method to align with examples.
+        Accepts a string prompt or list of messages.
+        """
+        # Convert to internal message type
+        if isinstance(prompt, str):
+            from .types.basic import Message
+            messages = [Message(role="user", content=prompt)]
+        else:
+            messages = prompt
+
+        model = kwargs.get('model') or getattr(self.config, 'model', None)
+        temperature = kwargs.get('temperature') or getattr(self.config, 'temperature', 0.7)
+        max_tokens = kwargs.get('max_tokens') or getattr(self.config, 'max_tokens', None)
+
+        async for chunk in self.stream_chat_completion(
+            messages=messages,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            **kwargs,
+        ):
+            yield chunk
     
     def _standardize_response(self, response: Any, model: str) -> Dict[str, Any]:
         """

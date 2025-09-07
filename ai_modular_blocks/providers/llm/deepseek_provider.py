@@ -62,9 +62,16 @@ class DeepSeekProvider(BaseLLMProvider):
 
         super().__init__(config)
         self.client: Optional[AsyncOpenAI] = None
-        
-        # Use DeepSeek API endpoint
-        self.base_url = config.base_url or self.DEFAULT_BASE_URL
+
+        # Normalize base URL to include /v1
+        base_url = config.base_url or self.DEFAULT_BASE_URL
+        if base_url and not base_url.rstrip('/').endswith('/v1'):
+            base_url = base_url.rstrip('/') + '/v1'
+        self.base_url = base_url
+
+        # Ensure a valid default model for DeepSeek
+        if not getattr(self.config, 'model', None) or self.config.model == 'gpt-3.5-turbo':
+            self.config.model = 'deepseek-chat'
 
     @classmethod
     def is_available(cls) -> bool:

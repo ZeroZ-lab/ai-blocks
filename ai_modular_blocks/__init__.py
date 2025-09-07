@@ -63,6 +63,26 @@ def create_llm(provider: str, **config) -> LLMProvider:
         - "anthropic" 
         - "deepseek"
     """
+    # Friendly defaults for examples: if requested provider has no API key but
+    # DEEPSEEK_API_KEY is present, fallback to DeepSeek.
+    import os
+    requested = provider.lower()
+
+    # Auto-fill API keys from environment if not provided
+    if "api_key" not in config or not config.get("api_key"):
+        env_key = os.getenv(f"{requested.upper()}_API_KEY")
+        if env_key:
+            config["api_key"] = env_key
+
+    # Fallback to DeepSeek when no key for requested provider but DeepSeek is available
+    if ("api_key" not in config or not config.get("api_key")) and os.getenv("DEEPSEEK_API_KEY"):
+        provider = "deepseek"
+        config["api_key"] = os.getenv("DEEPSEEK_API_KEY")
+
+    # Set a conservative default max_tokens to improve responsiveness in examples
+    if provider.lower() == "deepseek" and "max_tokens" not in config:
+        config["max_tokens"] = 256
+
     llm_config = LLMConfig(**config)
     return LLMProviderFactory.create_provider(provider, llm_config)
 

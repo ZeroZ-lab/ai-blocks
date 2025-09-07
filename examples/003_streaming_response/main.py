@@ -8,6 +8,7 @@
 """
 
 import asyncio
+import sys
 import os
 import time
 from dotenv import load_dotenv
@@ -144,13 +145,14 @@ async def demo_streaming():
     print("🎉 演示完成！")
 
     # 询问是否进入交互模式
-    print("\n🎮 是否进入交互聊天模式？(y/N)")
-    try:
-        choice = input().strip().lower()
-        if choice in ['y', 'yes', 'Y', '是']:
-            await bot.interactive_chat()
-    except KeyboardInterrupt:
-        print("\n👋 再见！")
+    if sys.stdin.isatty():
+        print("\n🎮 是否进入交互聊天模式？(y/N)")
+        try:
+            choice = input().strip().lower()
+            if choice in ['y', 'yes', 'Y', '是']:
+                await bot.interactive_chat()
+        except KeyboardInterrupt:
+            print("\n👋 再见！")
 
 
 async def main():

@@ -1,0 +1,60 @@
+[
+  {
+    "role": "system",
+    "content": "你是一个有用的AI助手。你会记住我们的对话历史，并根据上下文提供相关的回复。",
+    "timestamp": "2025-09-07T21:46:43.858570",
+    "type": "system"
+  },
+  {
+    "role": "user",
+    "content": "你还记得我的名字吗？",
+    "timestamp": "2025-09-07T21:46:56.838326",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'dict' object has no attribute 'usage'",
+    "timestamp": "2025-09-07T21:47:01.658330",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "我刚才说我喜欢什么编程语言？",
+    "timestamp": "2025-09-07T21:47:02.660913",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'dict' object has no attribute 'usage'",
+    "timestamp": "2025-09-07T21:47:07.514703",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "能推荐一些Python的高级特性给我学习吗？",
+    "timestamp": "2025-09-07T21:47:08.517090",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'dict' object has no attribute 'usage'",
+    "timestamp": "2025-09-07T21:47:23.517499",
+    "type": "assistant",
+    "provider": "deepseek"
+  },
+  {
+    "role": "user",
+    "content": "谢谢！你觉得装饰器在实际项目中有什么用途？",
+    "timestamp": "2025-09-07T21:47:24.519454",
+    "type": "user"
+  },
+  {
+    "role": "assistant",
+    "content": "抱歉，我遇到了一些问题：'dict' object has no attribute 'usage'",
+    "timestamp": "2025-09-07T21:47:39.289980",
+    "type": "assistant",
+    "provider": "deepseek"
+  }
+]
