@@ -27,6 +27,8 @@ python examples/001_basic_llm_call/main.py
 
 **👉 [查看完整文档](docs/README.md)**
 
+- 规划与优化清单：`docs/TODO.md`
+
 ## 🎯 核心特性
 
 - 🔌 **模块化设计** - 可组合、可替换的AI组件
